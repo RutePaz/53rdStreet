@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
@@ -26,6 +27,7 @@ namespace _53rdStreet.Models
 
         //atributos
         public string Character { get; set; }
+        public string Image { get; set; }
 
 
     }

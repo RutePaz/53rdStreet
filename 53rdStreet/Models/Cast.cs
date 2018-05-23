@@ -18,7 +18,8 @@ namespace _53rdStreet.Models
         [Key]
         public int ID_Actor { get; set;}
         public string Name { get; set; }
-        
+        public string Image { get; set; }
+
 
 
         public virtual ICollection<CastMusical> ListMusical { get; set; }
