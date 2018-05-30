@@ -26,8 +26,12 @@ namespace _53rdStreet.Models
         public virtual Cast Cast { get; set; }
 
         //atributos
+        [Required(ErrorMessage = " {0} required field!")]
+        [RegularExpression("[A-ZÍÉÂÁ][a-záéíóúàèìòùâêîôûäëïöüãõç]+(( |'|-| dos | da | de | e | d')[A-ZÍÉÂÁ][a-záéíóúàèìòùâêîôûäëïöüãõç]+){1,3}",
+        ErrorMessage = "O {0} it can only contain letters of blank spaces. Each word has to begin with a capital letter followed by a lower case letters...")]
+
         public string Character { get; set; }
-        public string Image { get; set; }
+        //public string Image { get; set; }
 
 
     }
