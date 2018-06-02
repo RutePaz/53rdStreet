@@ -77,7 +77,13 @@ namespace _53rdStreet.Controllers
             //escrever os dados de um novo musical na BD
 
             //especificar o ID do novo Musical 
-            int idNewMusical = db.Musical.Max(m => m.ID_Musical) + 1;
+            //testar se há registos na tabela Musical
+            int idNewMusical = 0;
+            try {
+                idNewMusical = db.Musical.Max(m => m.ID_Musical) + 1;
+            } catch (Exception) {
+                idNewMusical = 1;
+            }
 
             //guardar o ID do novo musical 
             musical.ID_Musical = idNewMusical;
@@ -106,16 +112,23 @@ namespace _53rdStreet.Controllers
             }
             //ModelState.IsValid : confronta os dados fornecidos d View com as exigências do Modelo
             if (ModelState.IsValid)
- {
-               //adiciona um novo musical
-                db.Musical.Add(musical);
-                 //faz commit ás alterações
-                db.SaveChanges();
-                //escrever o ficheiro com a fotografia no disco rígido, na pasta 'images'
-                uploadPoster.SaveAs(path);
+            {
+                try
+                {
+                    //adiciona um novo musical
+                    db.Musical.Add(musical);
+                    //faz commit ás alterações
+                    db.SaveChanges();
+                    //escrever o ficheiro com a fotografia no disco rígido, na pasta 'images'
+                    uploadPoster.SaveAs(path);
 
-                //Redirecionamento para a página de Index
-                return RedirectToAction("Index");
+                    //Redirecionamento para a página de Index
+                    return RedirectToAction("Index");
+                }
+                catch (Exception) {
+                    ModelState.AddModelError("", "An Error occurred with the addition of the new Musical");
+                }
+
             }
             //se houver um erro, reapresenta os dados do Agente na View
             return View(musical);
