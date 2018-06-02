@@ -42,7 +42,7 @@ namespace _53rdStreet.Migrations
 
   new Musical {ID_Musical=10, Title="Hamilton",  Synopsis="Hamilton is the story of the unlikely Founding Father determined to make his mark on the new nation as hungry and ambitious as he is. From bastard orphan to Washington's right-hand man, rebel to war hero, a loving husband caught in the country's first sex scandal, to the Treasury head who made an untrusting world believe in the American economy. George Washington, Eliza Hamilton, Thomas Jefferson and Hamilton's lifelong friend/foil Aaron Burr all make their mark in this astonishing new musical exploration of a political mastermind.", Director="Thomas Kail", Duration="2hrs, 55mins", OpeningNight=new DateTime(2018,8,6), Ticket="from 199.00$",Poster="Hamilton.jpg"}
 };
-            musical.ForEach(aa => context.Musical.AddOrUpdate(a => a.Title, aa));
+            musical.ForEach(mm => context.Musical.AddOrUpdate(m => m.Title, mm));
             context.SaveChanges();
             //*********************************************************************
             // add Cast
@@ -202,7 +202,7 @@ namespace _53rdStreet.Migrations
   new Reviews {ID_Review=19, Review="'Hamilton' is the most exciting and significant musical of the decade. Sensationally potent and theatrically vital, it is plugged straight into the wall socket of contemporary music. This show makes me feel hopeful for the future of musical theater.",MusicalFK=10,UserFK=3},
   new Reviews {ID_Review=20, Review="Historic. 'Hamilton' is brewing up a revolution. This is a show that aims impossibly high and hits its target. It's probably not possible to top the adrenaline rush.",MusicalFK=10,UserFK=1}
 };
-            reviews.ForEach(aa => context.Reviews.AddOrUpdate(a => a.Review, aa));
+            reviews.ForEach(rr => context.Reviews.AddOrUpdate(r => r.Review, rr));
             context.SaveChanges();
 
 
@@ -448,6 +448,8 @@ new Soundtrack {ID_Song=166, SongName="Alexander Hamilton", Duration="3:57", Mus
   new Soundtrack {ID_Song=211, SongName="Finale (Who Lives, Who Dies, Who Tells Your Story)", Duration="5:02", MusicalFK=10 }
 
 };
+            Song.ForEach(ss => context.Song.AddOrUpdate(m => m.SongName, ss));
+            context.SaveChanges();
 
 
             //*********************************************************************
@@ -461,7 +463,7 @@ new Soundtrack {ID_Song=166, SongName="Alexander Hamilton", Duration="3:57", Mus
   new User {ID_User=6,Username="Jeremy Saunders",Email="jeremy.p.saunders@gmail.com"}
 
 };
-            user.ForEach(aa => context.User.AddOrUpdate(a => a.Username, aa));
+            user.ForEach(uu => context.User.AddOrUpdate(u => u.Username, uu));
             context.SaveChanges();
 
             //*********************************************************************
@@ -568,7 +570,7 @@ new Soundtrack {ID_Song=166, SongName="Alexander Hamilton", Duration="3:57", Mus
                 new CastMusical {CastFK=85, MusicalFK=10, Character="Philip Hamilton" },
                 new CastMusical {CastFK=86, MusicalFK=10, Character="Peggy Schuyler" }
             };
-            CastMusical.ForEach(aa => context.CastMusical.AddOrUpdate(a => a.Character, aa));
+            CastMusical.ForEach(cc => context.CastMusical.AddOrUpdate(c => c.Character, cc));
             context.SaveChanges();
         }
     }

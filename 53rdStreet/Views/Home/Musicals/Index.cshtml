@@ -56,7 +56,10 @@
             @Html.DisplayFor(modelItem => item.Ticket)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Poster)
+            @*Html.DisplayFor(modelItem => item.Poster)*@
+            <a href="~/images/@item.Poster" target="_blank">
+               <img="~/images/@item.Poster" scrwidth="50" height="37" />
+            </a>
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ID_Musical }) |
