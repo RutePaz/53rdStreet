@@ -217,11 +217,18 @@ namespace _53rdStreet.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Musical musical = db.Musical.Find(id);
-            //remove o Agente da BD
-            db.Musical.Remove(musical);
-            //Commit
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                //remove o Agente da BD
+                db.Musical.Remove(musical);
+                //Commit
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex){
+                ModelState.AddModelError("", string.Format("It's not possible to remove the Musical nº {0}-{1}", id, musical.Title));
+            }
+            return View(musical);
         }
 
         protected override void Dispose(bool disposing)
