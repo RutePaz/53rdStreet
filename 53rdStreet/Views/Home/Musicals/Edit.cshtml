@@ -20,6 +20,10 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.ID_Musical)
 
+        @*esta instrução foi aqui adicionada, pois é necessária para garantir que o nome da fotografia
+            de um Musical seja devidamente entregue ao controller*@
+        @Html.HiddenFor(model => model.ID_Musical)
+
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">

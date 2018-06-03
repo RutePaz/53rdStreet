@@ -185,12 +185,23 @@ namespace _53rdStreet.Controllers
         {
             if (ModelState.IsValid)
             {
-                //neste cado já existe um Agente 
-                //apenas quero EDITAR os seus dados
-                db.Entry(musical).State = EntityState.Modified;
-                //efetuar 'Commit'
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    //neste caso já existe um Agente 
+                    //apenas quero EDITAR os seus dados
+                    db.Entry(musical).State = EntityState.Modified;
+                    //efetuar 'Commit'
+                    db.SaveChanges();
+
+                    //só no caso de submissão de uma nova fotografia é que há necessidade
+                    //de gravar essa imagem
+                    if (uploadPoster != null)
+                        uploadPoster.SaveAs(Path.Combine(Server.MapPath("~/images/"), musical.Poster));
+                    return RedirectToAction("Index");
+                }
+                catch (Exception) {
+                    throw;
+                }
             }
             return View(musical);
         }
