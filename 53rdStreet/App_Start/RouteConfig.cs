@@ -16,7 +16,7 @@ namespace _53rdStreet
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Musical", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

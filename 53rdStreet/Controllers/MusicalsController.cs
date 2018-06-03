@@ -25,7 +25,7 @@ namespace _53rdStreet.Controllers
         {
             //db.Musicals.ToList()->em sql: Select * from Agentes
             //enviar para a View uma lista com todos os Agentes
-            var listOfMusicals = db.Musical.ToList();
+            var listOfMusicals = db.Musical.OrderBy(m => m.Title).ToList();
             return View(listOfMusicals);
             //return View();
         }
@@ -69,6 +69,12 @@ namespace _53rdStreet.Controllers
         // POST: Musicals/Create
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// adiciona um novo Musical
+        /// </summary>
+        /// <param name="musical"></param>
+        /// <param name="uploadPoster"></param>
+        /// <returns></returns>
         [HttpPost]
         //anotador para proteção por roubo de indentidade 
         [ValidateAntiForgeryToken]
@@ -125,8 +131,8 @@ namespace _53rdStreet.Controllers
                     //Redirecionamento para a página de Index
                     return RedirectToAction("Index");
                 }
-                catch (Exception) {
-                    ModelState.AddModelError("", "An Error occurred with the addition of the new Musical");
+                catch (Exception ) {
+                    ModelState.AddModelError("", "An error occurred with the addition of the new Musical");
                 }
 
             }
@@ -167,13 +173,15 @@ namespace _53rdStreet.Controllers
         // Para se proteger de mais ataques, ative as propriedades específicas a que você quer se conectar. Para 
         // obter mais detalhes, consulte https://go.microsoft.com/fwlink/?LinkId=317598.
         /// <summary>
-        /// 
+        /// editar os dados de um Musical
         /// </summary>
         /// <param name="musical"></param>
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID_Musical,Title,Synopsis,Director,Duration,OpeningNight,Ticket,Poster")] Musical musical)
+        //o parametro 'uploadPoster' é adicionado de modo a que seja possível a edição de um poster de um musical
+        //uma variável do tipo HttpPostedFileBase para receber o ficheiro da imagem
+        public ActionResult Edit([Bind(Include = "ID_Musical,Title,Synopsis,Director,Duration,OpeningNight,Ticket,Poster")] Musical musical, HttpPostedFileBase uploadPoster)
         {
             if (ModelState.IsValid)
             {

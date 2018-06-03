@@ -6,11 +6,14 @@
 
 <h2>Edit</h2>
 
+@* comando para fazer um upload de uma imagem
+    enctype= "multipart/form-data" -  responsável por enviar os dados do browser para o servidor
 
-@using (Html.BeginForm())
+*@
+@using (Html.BeginForm("Edit", "Musical", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>Musical</h4>
         <hr />
